@@ -7,7 +7,7 @@
     <ul>
         {% for movie in movies %}
             <li>
-                {{ movie.name }} rating - {{ movie.rating }}, year - {{ movie.year|default:"unknown" }}
+                <a href="{{ movie.get_url }}"> {{ movie.name }} </a> rating - {{ movie.rating }}, year - {{ movie.year|default:"unknown" }}
             </li>
         {% endfor %}
     </ul>

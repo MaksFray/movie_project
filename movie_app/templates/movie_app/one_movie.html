@@ -1,0 +1,10 @@
+{% extends 'movie_app/base.html' %}
+
+{% block title %} {{movie.name|title}} {% endblock %}
+
+{% block content %}
+    <h1>Movie - {{ movie.name}}</h1>
+    <h2>
+        {{ movie }}
+    </h2>
+{% endblock %}
