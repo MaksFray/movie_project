@@ -5,6 +5,8 @@ from .models import Movie
 
 def show_all_movies(request):
     movies = Movie.objects.all()
+    for movie in movies:
+        movie.save()
     return render(request, 'movie_app/all_movies.html', {
         'movies': movies,
     })
