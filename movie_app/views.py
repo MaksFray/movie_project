@@ -4,7 +4,7 @@ from .models import Movie
 
 
 def show_all_movies(request):
-    movies = Movie.objects.all()
+    movies = Movie.objects.order_by('-name')
     for movie in movies:
         movie.save()
     return render(request, 'movie_app/all_movies.html', {
