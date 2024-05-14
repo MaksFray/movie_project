@@ -11,4 +11,10 @@
             </li>
         {% endfor %}
     </ul>
+
+    <h2>
+        Min rating = {{ movies_agg.rating__min }} <br>
+        Max rating = {{ movies_agg.rating__max }} <br>
+        All movies quantity = {{ movies_count }}
+    </h2>
 {% endblock %}
