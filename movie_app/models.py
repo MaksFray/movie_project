@@ -7,6 +7,7 @@ class Movie(models.Model):
     name = models.CharField(max_length=40)
     rating = models.IntegerField()
     author = models.CharField(max_length=30)
+    year = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(default='', null=False)
 
     def save(self, *args, **kwargs):

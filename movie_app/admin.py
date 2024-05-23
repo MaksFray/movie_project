@@ -4,4 +4,7 @@ from . models import Movie
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'author', 'rating']
+    list_display = ['name', 'author', 'rating', 'year']
+    list_editable = ['author', 'year']
+    ordering = ['-rating', 'name']
+    list_per_page = 10
