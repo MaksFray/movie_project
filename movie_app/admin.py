@@ -10,6 +10,7 @@ class MovieAdmin(admin.ModelAdmin):
     ordering = ['-rating', 'name']
     list_per_page = 10
     actions = ['set_rubles', 'set_euro',]
+    search_fields = ['name', 'rating']
     @admin.display(ordering='rating', description='Status')
     def rating_status(self, movie):
         if movie.rating < 50:
