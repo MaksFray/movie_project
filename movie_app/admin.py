@@ -3,6 +3,25 @@ from django.db.models import QuerySet
 from . models import Movie
 # Register your models here.
 
+class RatingFilter(admin.SimpleListFilter):
+    title = 'Rating filter'
+    parameter_name = 'rating'
+    def lookups(self, request, model_admin):
+        return [
+            ('<40','Low'),
+            ('40-80', 'Medium'),
+            ('>80', 'High')
+        ]
+
+    def queryset(self, request, queryset: QuerySet):
+        if self.value()=='<40':
+            return queryset.filter(rating__lt=40)
+        if self.value()=='40-80':
+            return queryset.filter(rating__gte=40).filter(rating__lt=80)
+        if self.value()=='>80':
+            return queryset.filter(rating__gte=80)
+        return queryset
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'author', 'rating', 'year', 'budget', 'currency', 'rating_status']
@@ -11,6 +30,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_per_page = 10
     actions = ['set_rubles', 'set_euro',]
     search_fields = ['name', 'rating']
+    list_filter = ['name', RatingFilter, 'year']
     @admin.display(ordering='rating', description='Status')
     def rating_status(self, movie):
         if movie.rating < 50:
