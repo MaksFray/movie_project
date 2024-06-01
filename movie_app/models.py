@@ -26,7 +26,7 @@ class Movie(models.Model):
 
     name = models.CharField(max_length=40)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
-    author = models.CharField(max_length=30)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
     budget = models.IntegerField(default=1_000_000, validators=[MinValueValidator(0)])
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     year = models.IntegerField(null=True, blank=True)
