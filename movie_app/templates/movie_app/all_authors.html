@@ -1,0 +1,16 @@
+{% extends 'movie_app/base.html' %}
+
+{% block title %} All movies {% endblock %}
+
+{% block content %}
+    <h2>All authors list</h2>
+    <ul>
+        {% for author in authors %}
+            <li>
+                <a href="{{ author.get_url }}"> {{ author.first_name }} {{ author.last_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
