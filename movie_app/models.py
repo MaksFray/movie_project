@@ -3,7 +3,19 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
 
+class Actor(models.Model):
+    MALE = "M"
+    FEMALE = "F"
 
+    GENDERS = {
+        (MALE, 'Man'),
+        (FEMALE, 'Woman'),
+    }
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -31,6 +43,7 @@ class Movie(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     year = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(default='', null=False)
+    actors = models.ManyToManyField(Actor)
 
     def get_url(self):
         return reverse('movie_detail', args=[self.slug])
