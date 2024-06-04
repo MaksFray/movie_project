@@ -23,6 +23,8 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+    def get_url(self):
+        return reverse('author_detail', args=[self.id])
 
 # Create your models here.
 class Movie(models.Model):
