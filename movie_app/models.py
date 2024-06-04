@@ -47,7 +47,7 @@ class Movie(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
     year = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(default='', null=False)
-    actors = models.ManyToManyField(Actor)
+    actors = models.ManyToManyField(Actor, related_name='movies')
 
     def get_url(self):
         return reverse('movie_detail', args=[self.slug])
