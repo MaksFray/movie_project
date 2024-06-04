@@ -9,6 +9,10 @@
     </h2>
     <hr>
     <ul>
-
+        {% for movie in author.movies.all %}
+            <li>
+                <a href="{{ movie.get_url }}"> {{ movie.name }} </a> rating - {{ movie.rating }}, year - {{ movie.year|default:"unknown" }}
+            </li>
+        {% endfor %}
     </ul>
 {% endblock %}
