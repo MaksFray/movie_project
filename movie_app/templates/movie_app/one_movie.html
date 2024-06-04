@@ -7,4 +7,16 @@
     <h2>
         {{ movie }}
     </h2>
+    <hr>
+    <h2>Author</h2>
+    <h2><a href="{{ movie.author.get_url }}"> {{ movie.author.first_name }} {{ movie.author.last_name }}</a></h2>
+    <hr>
+    <h2>All actors</h2>
+    <ul>
+        {% for actor in movie.actors.all %}
+            <li>
+                <a href="{{ actor.get_url }}"> {{ actor.first_name }} {{ actor.last_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

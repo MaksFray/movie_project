@@ -1,20 +1,18 @@
 {% extends 'movie_app/base.html' %}
 
-{% block title %} All movies {% endblock %}
+{% block title %} {{author.name|title}} {% endblock %}
 
 {% block content %}
-    <h2>All movies list</h2>
+    <h1>Author - {{ author.first_name }}</h1>
+    <h2>
+        {{ author }}
+    </h2>
+    <hr>
     <ul>
-        {% for movie in movies %}
+        {% for movie in author.movies.all %}
             <li>
                 <a href="{{ movie.get_url }}"> {{ movie.name }} </a> rating - {{ movie.rating }}, year - {{ movie.year|default:"unknown" }}
             </li>
         {% endfor %}
     </ul>
-
-    <h2>
-        Min rating = {{ movies_agg.rating__min }} <br>
-        Max rating = {{ movies_agg.rating__max }} <br>
-        All movies quantity = {{ movies_count }}
-    </h2>
 {% endblock %}
