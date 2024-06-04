@@ -35,4 +35,13 @@ def show_author(request, id:int):
     })
 
 def show_all_actors(request):
-    pass
+    actors = Actor.objects.order_by('-last_name')
+    return render(request, 'movie_app/all_actors.html', {
+        'actors': actors,
+    })
+
+def show_actor(request, id:int):
+    actor = get_object_or_404(Actor, id=id)
+    return render(request, 'movie_app/actor.html',{
+        'actor': actor,
+    })
