@@ -9,6 +9,17 @@ class ShowAllMovies(ListView):
     template_name = 'movie_app/all_movies.html'
     context_object_name = 'movies'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        sorted_movies = queryset.order_by('name')
+        return sorted_movies
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['movies_count'] = context['movies'].count()
+        context['movies_agg'] = context['movies'].aggregate(Min('rating'), Max('rating'))
+        return context
+
 def show_all_movies(request):
     movies = Movie.objects.order_by('-name')
     for movie in movies:
