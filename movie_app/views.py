@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Movie, Author, Actor
 from django.db.models import Sum, Avg, Min, Max, Count
+from django.views.generic import ListView
 # Create your views here.
 
+class ShowAllMovies(ListView):
+    model = Movie
+    template_name = 'movie_app/all_movies.html'
+    context_object_name = 'movies'
 
 def show_all_movies(request):
     movies = Movie.objects.order_by('-name')
