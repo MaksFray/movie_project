@@ -25,7 +25,6 @@ class ShowMovie(DetailView):
     model = Movie
     slug_url_kwarg = 'slug_movie'
 
-
 class ShowAllAuthors(ListView):
     model = Author
     template_name = 'movie_app/all_authors.html'
@@ -36,10 +35,20 @@ class ShowAllAuthors(ListView):
         sorted_authors = queryset.order_by('-last_name')
         return sorted_authors
 
-
 class ShowAuthor(DetailView):
     model = Author
     template_name = 'movie_app/author.html'
+
+
+class ShowAllActors(ListView):
+    model = Actor
+    template_name = 'movie_app/all_actors.html'
+    context_object_name = 'actors'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        sorted_actors = queryset.order_by('-last_name')
+        return sorted_actors
 
 def show_all_actors(request):
     actors = Actor.objects.order_by('-last_name')
