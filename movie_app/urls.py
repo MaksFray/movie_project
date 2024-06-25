@@ -6,10 +6,10 @@ admin.site.site_header = "My admin panel"
 admin.site.index_title = "My super admin panel"
 
 urlpatterns = [
-    path('', views.show_all_movies),
-    path('authors', views.show_all_authors),
-    path('actors', views.show_all_actors),
-    path('authors/<int:id>', views.show_author, name='author_detail'),
-    path('actors/<int:id>', views.show_actor, name='actor_detail'),
-    path('<slug:slug_movie>', views.show_movie, name='movie_detail'),
+    path('', views.ShowAllMovies.as_view()),
+    path('authors', views.ShowAllAuthors.as_view()),
+    path('actors', views.ShowAllActors.as_view()),
+    path('authors/<int:pk>', views.ShowAuthor.as_view(), name='author_detail'),
+    path('actors/<int:pk>', views.ShowActor.as_view(), name='actor_detail'),
+    path('<slug:slug_movie>', views.ShowMovie.as_view(), name='movie_detail'),
 ]
